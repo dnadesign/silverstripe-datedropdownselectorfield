@@ -1,0 +1,11 @@
+#LeftPane .CompositeField {
+	margin: 0;
+}
+
+#LeftPane .dateselectorfield,
+#LeftPane .rangeselectedfrom .dropdown,
+#LeftPane .rangeselectedto .dropdown {
+	width: 30%;
+	float: left;
+	clear: none;
+}
