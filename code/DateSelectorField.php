@@ -131,7 +131,7 @@ class DateSelectorField extends CompositeField {
 		}
 		if ($d && $m && $y) {
 			foreach($this->getChildren() as $child) {
-				switch($child->Name()) {
+				switch($child->getName()) {
 					case $this->name.'[' . $this->modifier . 'Day]':
 						$child->setValue($d);
 						break;

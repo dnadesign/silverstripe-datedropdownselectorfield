@@ -11,7 +11,7 @@ lists rather than inputs.
 
 ## Requirements
 
- * SilverStripe 2.4+
+ * SilverStripe 3.x
 
 ## Features
 

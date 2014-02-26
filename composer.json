@@ -9,6 +9,9 @@
 		"email": "john.milmine@dna.co.nz"
 	}],
 	"require": {
-		"silverstripe/framework": ">=2.4"
+		"silverstripe/framework": "3.*"
+	},
+	"extra" : {
+		"installer-name": "datedropdownselectorfield"
 	}
 }
