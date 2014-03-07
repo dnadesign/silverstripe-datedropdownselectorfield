@@ -16,22 +16,26 @@ class DateSelectorField extends CompositeField {
 			0 => 'Day'
 		);
 		for($i = 1; $i < 32; $i++) {
-			$dayArray[$i] = $i;
+			if($i < 10) {
+				$dayArray['0' . $i] = $i;
+			} else {
+				$dayArray[$i] = $i;
+			}
 		}
 		$monthArray = array(
-			0 => 'Month',
-			1 => 'Jan',
-			2 => 'Feb',
-			3 => 'March',
-			4 => 'Apr',
-			5 => 'May',
-			6 => 'June',
-			7 => 'July',
-			8 => 'Aug',
-			9 => 'Sept',
-			10 => 'Oct',
-			11 => 'Nov',
-			12 => 'Dec'
+			'0' => 'Month',
+			'01' => 'Jan',
+			'02' => 'Feb',
+			'03' => 'March',
+			'04' => 'Apr',
+			'05' => 'May',
+			'06' => 'June',
+			'07' => 'July',
+			'08' => 'Aug',
+			'09' => 'Sept',
+			'10' => 'Oct',
+			'11' => 'Nov',
+			'12' => 'Dec'
 		);
 		$now = new DateTime();
 		$startYear = $now->format('Y');
@@ -115,8 +119,8 @@ class DateSelectorField extends CompositeField {
 		$m = null;
 		$y = null;
 		if ($value instanceof DateTime) {
-			$d = $value->format('j');
-			$m = $value->format('n');
+			$d = $value->format('d');
+			$m = $value->format('m');
 			$y = $value->format('Y');
 		} else if (is_array($value)) {
 			if (isset($value[$this->modifier . 'Day'])) {
