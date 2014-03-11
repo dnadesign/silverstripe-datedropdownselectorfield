@@ -147,12 +147,15 @@ class DateSelectorField extends CompositeField {
 						break;
 				}
 			}
-			if ($d < 10) {
-				$d = '0'.$d;
+
+			// suffix zero if one is missing for single digit days/months
+			if($d < 10 && strlen($d) == 1) {
+				$d = '0' . $d;
 			}
-			if ($m < 10) {
-				$m = '0'.$m;
+			if($m < 10 && strlen($m) == 1) {
+				$m = '0' . $m;
 			}
+
 			$this->value = $y . '-' . $m . '-' . $d;
 		}
 
