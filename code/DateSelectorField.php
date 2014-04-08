@@ -7,6 +7,8 @@ class DateSelectorField extends CompositeField {
 
 	protected $modifier;
 
+	protected $useHeading;
+
 	public function __construct($name, $title = null, $value = null, $modifier = null) {
 		$this->name = $name;
 
@@ -59,13 +61,28 @@ class DateSelectorField extends CompositeField {
 		}
 
 		if($title) {
-			array_unshift($fields, $header = new HeaderField($this->name.'['. $this->modifier .'Title]', $title . ' ' . $this->modifier, 4));
+			if($this->useHeading) {
+				array_unshift($fields, $header = new HeaderField(
+					$this->name.$this->modifier.'Title', 
+					trim($title . ' ' . $this->modifier), 
+					4
+				));
+				$header->setAllowHTML(true);
+			} else {
+				array_unshift($fields, new LiteralField(
+					$this->name.$this->modifier.'Title',
+					'<label class="left" for="' . $this->name . '">' . trim($title . ' ' . $this->modifier) . '</label>'
+				));
+			}
 
-			$header->setAllowHTML(true);
 		}
-	
+
 		parent::__construct($fields);
 		$this->setValue($value);
+	}
+
+	public function setUseHeading($bool) {
+		$this->useHeading = $bool;
 	}
 
 	/**
