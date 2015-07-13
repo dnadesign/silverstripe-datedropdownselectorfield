@@ -1,25 +1,29 @@
 <?php
 
 /**
- * A {@link FormField} containing two {@link DateSelectorField} instances for 
+ * A {@link FormField} containing two {@link DateSelectorField} instances for
  * users to select between a range of dates
  *
  * @package datedropdownselectorfield
  */
 class DateRangeSelectorField extends CompositeField {
 
+	protected $from;
+
+	protected $to;
+
 	public function __construct($name, $title = null, $value = null) {
 		$this->name = $name;
-		$this->setTitle($name);
+		$this->setTitle($title);
 
 		parent::__construct(array(
-			$from = new DateSelectorField($this->name, $name, null, 'From'),
-			$to = new DateSelectorField($this->name, $name, null, 'To'),
+			$this->from = new DateSelectorField($this->name, $title, null, 'From'),
+			$this->to = new DateSelectorField($this->name, $title, null, 'To'),
 		));
 
-		$from->addExtraClass('rangeselectedfrom');
-		$to->addExtraClass('rangeselectedto');
-		
+		$this->from->addExtraClass('rangeselectedfrom');
+		$this->to->addExtraClass('rangeselectedto');
+
 		$this->setValue($value);
 	}
 
@@ -27,36 +31,42 @@ class DateRangeSelectorField extends CompositeField {
 		return true;
 	}
 
-	public function isComposite() {
-		return false;
-	}
-
 	public function getValue() {
 		return $this->value;
 	}
 
-	public function setValue($value) {
+	/**
+	 * Set the field name
+	 */
+	public function setName($name) {
+		$this->name = $name;
+		$this->from->setName($name);
+		$this->to->setName($name);
+		return $this;
+	}
+
+	public function setValue($value, $data = null) {
 		if(is_array($value)) {
 			if (isset($value['FromDay'])) {
 				$dF = $value['FromDay'];
 			}
-			
+
 			if (isset($value['FromMonth'])) {
 				$mF = $value['FromMonth'];
 			}
-			
+
 			if (isset($value['FromYear'])) {
 				$yF = $value['FromYear'];
 			}
-			
+
 			if (isset($value['ToDay'])) {
 				$dT = $value['ToDay'];
 			}
-			
+
 			if (isset($value['ToMonth'])) {
 				$mT = $value['ToMonth'];
 			}
-			
+
 			if (isset($value['ToYear'])) {
 				$yT = $value['ToYear'];
 			}

@@ -1,11 +1,12 @@
-#LeftPane .CompositeField {
+#cms-content-tools-ModelAdmin div.CompositeField {
 	margin: 0;
 }
 
-#LeftPane .dateselectorfield,
-#LeftPane .rangeselectedfrom .dropdown,
-#LeftPane .rangeselectedto .dropdown {
-	width: 30%;
+#cms-content-tools-ModelAdmin div.dateselectorfield,
+#cms-content-tools-ModelAdmin .rangeselectedfrom div.dropdown,
+#cms-content-tools-ModelAdmin .rangeselectedto div.dropdown {
+	border-bottom: none;
+	width: 33.3333%;
 	float: left;
 	clear: none;
 }

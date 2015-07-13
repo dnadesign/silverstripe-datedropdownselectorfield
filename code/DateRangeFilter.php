@@ -11,51 +11,53 @@ class DateRangeFilter extends SearchFilter {
 		if (!isset($this->value)) {
 			return false;
 		}
+		$yF = $mF = $dF = 0;
+		$yT = $mT = $dT = 0;
 
 		$value = $this->value;
 
 		if(is_array($value)) {
-			if (isset($value['FromDay'])) {
-				$dF = $value['FromDay'];
+			if (isset($value['From']['Day'])) {
+				$dF = $value['From']['Day'];
 			}
 
-			if (isset($value['FromMonth'])) {
-				$mF = $value['FromMonth'];
+			if (isset($value['From']['Month'])) {
+				$mF = $value['From']['Month'];
 			}
 
-			if (isset($value['FromYear'])) {
-				$yF = $value['FromYear'];
+			if (isset($value['From']['Year'])) {
+				$yF = $value['From']['Year'];
 			}
 
-			if (isset($value['ToDay'])) {
-				$dT = $value['ToDay'];
+			if (isset($value['To']['Day'])) {
+				$dT = $value['To']['Day'];
 			}
 
-			if (isset($value['ToMonth'])) {
-				$mT = $value['ToMonth'];
+			if (isset($value['To']['Month'])) {
+				$mT = $value['To']['Month'];
 			}
-			
-			if (isset($value['ToYear'])) {
-				$yT = $value['ToYear'];
+
+			if (isset($value['To']['Year'])) {
+				$yT = $value['To']['Year'];
 			}
 
 			$from = 0;
 			$to = 0;
-			
+
 			if ($yF != 0 && $mF != 0 && $dF != 0) {
 				$from = $yF . '-' . $mF . '-' . $dF;
 			}
-			
+
 			if ($yT != 0 && $mT != 0 && $dT != 0) {
 				$to = $yT . '-' . $mT . '-' . $dT;
 			}
 
 			$value = $from . '-to-' . $to;
 		}
-		
+
 		if (strpos($value, '-to-') !== FALSE) {
 			$valueArray = explode('-to-', $value);
-			
+
 			if ($valueArray[0] != 0) {
 				$this->setMin($valueArray[0]);
 			}
@@ -74,7 +76,7 @@ class DateRangeFilter extends SearchFilter {
 		$this->max = $max;
 	}
 
-	public function apply(SQLQuery $query) {
+	public function apply(DataQuery $query) {
 		if (!isset($this->min) || !isset($this->max)) {
 			$this->findMinMax();
 		}
@@ -100,5 +102,32 @@ class DateRangeFilter extends SearchFilter {
 				Convert::raw2sql($this->max)
 			));
 		}
+	}
+
+	/**
+	 * Applies a match on the starting characters of a field value.
+	 *
+	 * @return DataQuery
+	 */
+	protected function applyOne(DataQuery $query) {
+		return true;
+	}
+
+	/**
+	 * Applies a match on the starting characters of a field value.
+	 *
+	 * @return DataQuery
+	 */
+	protected function applyMany(DataQuery $query) {
+		return true;
+	}
+
+	/**
+	 * Excludes a match on the starting characters of a field value.
+	 *
+	 * @return DataQuery
+	 */
+	protected function excludeOne(DataQuery $query) {
+		return true;
 	}
 }

@@ -9,8 +9,12 @@ class DateSelectorField extends CompositeField {
 
 	protected $useHeading;
 
+	protected $day;
+	protected $month;
+	protected $year;
+
 	public function __construct($name, $title = null, $value = null, $modifier = null) {
-		$this->name = $name;
+		$this->name = $name .'[' . $modifier . ']';
 
 		$this->setTitle($title);
 		$this->modifier = $modifier;
@@ -45,15 +49,15 @@ class DateSelectorField extends CompositeField {
 		$yearArray = array(
 			0 => 'Year'
 		);
-		
+
 		for($i = $startYear; $i >= $endYear; $i--) {
 			$yearArray[$i] = $i;
 		}
-		
+
 		$fields = array(
-			new DropdownField($this->name.'[' . $this->modifier . 'Day]', '', $dayArray),
-			new DropdownField($this->name.'[' . $this->modifier . 'Month]', '', $monthArray),
-			new DropdownField($this->name.'[' . $this->modifier . 'Year]', '', $yearArray)
+			$this->day = new DropdownField($this->name . '[Day]', '', $dayArray),
+			$this->month = new DropdownField($this->name . '[Month]', '', $monthArray),
+			$this->year = new DropdownField($this->name . '[Year]', '', $yearArray)
 		);
 
 		foreach($fields as $field) {
@@ -63,8 +67,8 @@ class DateSelectorField extends CompositeField {
 		if($title) {
 			if($this->useHeading) {
 				array_unshift($fields, $header = new HeaderField(
-					$this->name.$this->modifier.'Title', 
-					trim($title . ' ' . $this->modifier), 
+					$this->name.$this->modifier.'Title',
+					trim($title . ' ' . $this->modifier),
 					4
 				));
 				$header->setAllowHTML(true);
@@ -77,12 +81,25 @@ class DateSelectorField extends CompositeField {
 
 		}
 
+		Requirements::css('datedropdownselectorfield/css/admin.css');
+
 		parent::__construct($fields);
 		$this->setValue($value);
 	}
 
 	public function setUseHeading($bool) {
 		$this->useHeading = $bool;
+	}
+
+	/**
+	 * Set the field name
+	 */
+	public function setName($name) {
+		$this->name = $name . '[' . $this->modifier . ']';
+		$this->day->setName($this->name . '[Day]');
+		$this->month->setName($this->name . '[Month]');
+		$this->year->setName($this->name . '[Year]');
+		return $this;
 	}
 
 	/**
@@ -95,7 +112,7 @@ class DateSelectorField extends CompositeField {
 		$idAtt = isset($this->id) ? " id=\"{$this->id}\"" : '';
 		$className = ($this->columnCount) ? "field CompositeField {$this->extraClass()} multicolumn" : "field CompositeField {$this->extraClass()}";
 		$content = "<div class=\"$className\"$idAtt>\n";
-		
+
 		foreach($this->getChildren() as $subfield) {
 			if($this->columnCount) {
 				$className = "column{$this->columnCount}";
@@ -111,17 +128,13 @@ class DateSelectorField extends CompositeField {
 		$content .= (!empty($message)) ? "<span class=\"message $type\">$message</span>" : "";
 
 		$content .= "</div>\n";
-				
+
 		return $content;
 	}
 
 
 	public function hasData() {
 		return true;
-	}
-
-	public function isComposite() {
-		return false;
 	}
 
 	public function getValue() {
