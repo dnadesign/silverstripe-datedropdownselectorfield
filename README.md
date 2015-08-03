@@ -13,6 +13,11 @@ lists rather than inputs.
 
  * SilverStripe 3.x
 
+
+## Installion
+
+	composer require "dnadesign/silverstripe-datedropdownselectorfield": "dev-master"
+	
 ## Features
 
  * DateSelectorField - FormField providing 3 dropdown options

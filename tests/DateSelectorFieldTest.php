@@ -1,4 +1,5 @@
 <?php
+
 class DateSelectorFieldTest extends SapphireTest {
 
 	public function testSetValueDateTime() {
