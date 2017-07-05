@@ -47,28 +47,35 @@ class DateRangeSelectorField extends CompositeField {
 
 	public function setValue($value, $data = null) {
 		if(is_array($value)) {
-			if (isset($value['FromDay'])) {
-				$dF = $value['FromDay'];
+			$yF = 0;
+			$mF = 0;
+			$dF = 0;
+			$yT = 0;
+			$mT = 0;
+			$dT = 0;
+
+			if (isset($value['From']['Day'])) {
+				$dF = $value['From']['Day'];
 			}
 
-			if (isset($value['FromMonth'])) {
-				$mF = $value['FromMonth'];
+			if (isset($value['From']['Month'])) {
+				$mF = $value['From']['Month'];
 			}
 
-			if (isset($value['FromYear'])) {
-				$yF = $value['FromYear'];
+			if (isset($value['From']['Year'])) {
+				$yF = $value['From']['Year'];
 			}
 
-			if (isset($value['ToDay'])) {
-				$dT = $value['ToDay'];
+			if (isset($value['To']['Day'])) {
+				$dT = $value['To']['Day'];
 			}
 
-			if (isset($value['ToMonth'])) {
-				$mT = $value['ToMonth'];
+			if (isset($value['To']['Month'])) {
+				$mT = $value['To']['Month'];
 			}
 
-			if (isset($value['ToYear'])) {
-				$yT = $value['ToYear'];
+			if (isset($value['To']['Year'])) {
+				$yT = $value['To']['Year'];
 			}
 
 			$value = $yF . '-' . $mF . '-' . $dF . '-to-' . $yT . '-' . $mT . '-' . $dT;
