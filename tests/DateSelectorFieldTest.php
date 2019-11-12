@@ -1,5 +1,11 @@
 <?php
 
+namespace DNADesign\SilverstripeDatedropdownselectorfield\Tests;
+
+use DNADesign\SilverstripeDatedropdownselectorfield\DateSelectorField;
+use SilverStripe\Dev\SapphireTest;
+use DateTime;
+
 class DateSelectorFieldTest extends SapphireTest {
 
 	public function testSetValueDateTime() {

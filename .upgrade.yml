@@ -1,0 +1,6 @@
+mappings:
+  EditableDateDropdownField: DNADesign\SilverstripeDatedropdownselectorfield\EditableDateDropdownField
+  DateRangeFilter: DNADesign\SilverstripeDatedropdownselectorfield\DateRangeFilter
+  DateRangeSelectorField: DNADesign\SilverstripeDatedropdownselectorfield\DateRangeSelectorField
+  DateSelectorField: DNADesign\SilverstripeDatedropdownselectorfield\DateSelectorField
+  DateSelectorFieldTest: DNADesign\SilverstripeDatedropdownselectorfield\Tests\DateSelectorFieldTest

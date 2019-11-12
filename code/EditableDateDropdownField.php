@@ -1,22 +1,26 @@
 <?php
 
+namespace DNADesign\SilverstripeDatedropdownselectorfield;
+
+use SilverStripe\Core\Manifest\ModuleResourceLoader;
+
 if(class_exists('EditableDateField')) {
 	class EditableDateDropdownField extends EditableFormField {
-		
+
 		private static $singular_name = 'Date Dropdown Field';
-		
+
 		private static $plural_name = 'Date Dropdown Fields';
-		
+
 		public function populateFromPostData($data) {
 			$fieldPrefix = 'Default-';
-			
+
 			if(empty($data['Default']) && !empty($data[$fieldPrefix.'Year']) && !empty($data[$fieldPrefix.'Month']) && !empty($data[$fieldPrefix.'Day'])) {
-				$data['Default'] = $data['Year'] . '-' . $data['Month'] . '-' . $data['Day'];		
+				$data['Default'] = $data['Year'] . '-' . $data['Month'] . '-' . $data['Day'];
 			}
-			
+
 			parent::populateFromPostData($data);
 		}
-		
+
 		/**
 		 * Return the form field
 		 *
@@ -31,12 +35,14 @@ if(class_exists('EditableDateField')) {
 				$field->setAttribute('data-rule-required', 'true');
 				$field->setAttribute('data-msg-required', $errorMessage);
 			}
-			
+
 			return $field;
 		}
 
 		public function getIcon() {
-			return 'userforms/images/editabledatefield.png';
+			return ModuleResourceLoader::singleton()->resolveURL(
+			    'silverstripe/userforms: images/editabledatefield.png'
+            );
 		}
 
 		public function getValueFromData($data) {
