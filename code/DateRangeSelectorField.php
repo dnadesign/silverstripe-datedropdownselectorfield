@@ -1,5 +1,9 @@
 <?php
 
+namespace DNADesign\SilverstripeDatedropdownselectorfield;
+
+use SilverStripe\Forms\CompositeField;
+
 /**
  * A {@link FormField} containing two {@link DateSelectorField} instances for
  * users to select between a range of dates

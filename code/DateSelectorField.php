@@ -1,5 +1,14 @@
 <?php
 
+namespace DNADesign\SilverstripeDatedropdownselectorfield;
+
+use DateTime;
+use SilverStripe\Forms\CompositeField;
+use SilverStripe\Forms\DropdownField;
+use SilverStripe\Forms\HeaderField;
+use SilverStripe\Forms\LiteralField;
+use SilverStripe\View\Requirements;
+
 /**
  * @package datedropdownselectorfield
  */
@@ -81,7 +90,7 @@ class DateSelectorField extends CompositeField {
 
 		}
 
-		Requirements::css('datedropdownselectorfield/css/admin.css');
+		Requirements::css('dnadesign/silverstripe-datedropdownselectorfield: css/admin.css');
 
 		parent::__construct($fields);
 		$this->setValue($value);
@@ -141,7 +150,7 @@ class DateSelectorField extends CompositeField {
 		return $this->value;
 	}
 
-	public function setValue($value) {
+	public function setValue($value, $data = null) {
 		if (is_string($value)) {
 			$value = new DateTime($value);
 		}
@@ -197,7 +206,7 @@ class DateSelectorField extends CompositeField {
 		$value = true;
 
 		foreach($children as $child) {
-			if(get_class($child) == "DropdownField") {
+			if(get_class($child) == DropdownField::class) {
 				if(!($value = $child->Value()) || $value == '') $value = false;
 			}
 		}

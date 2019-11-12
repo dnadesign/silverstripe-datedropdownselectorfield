@@ -13,7 +13,7 @@ lists rather than inputs.
 
 ## Requirements
 
- * SilverStripe 3.x
+ * SilverStripe 4.x
 
 
 ## Installion

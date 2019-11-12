@@ -1,5 +1,11 @@
 <?php
 
+namespace DNADesign\SilverstripeDatedropdownselectorfield;
+
+use SilverStripe\Core\Convert;
+use SilverStripe\ORM\DataQuery;
+use SilverStripe\ORM\Filters\SearchFilter;
+
 /**
  * @package datedropdownselectorfield
  */
@@ -104,29 +110,32 @@ class DateRangeFilter extends SearchFilter {
 		}
 	}
 
-	/**
-	 * Applies a match on the starting characters of a field value.
-	 *
-	 * @return DataQuery
-	 */
+    /**
+     * Applies a match on the starting characters of a field value.
+     *
+     * @param DataQuery $query
+     * @return bool|DataQuery
+     */
 	protected function applyOne(DataQuery $query) {
 		return true;
 	}
 
-	/**
-	 * Applies a match on the starting characters of a field value.
-	 *
-	 * @return DataQuery
-	 */
+    /**
+     * Applies a match on the starting characters of a field value.
+     *
+     * @param DataQuery $query
+     * @return bool|DataQuery
+     */
 	protected function applyMany(DataQuery $query) {
 		return true;
 	}
 
-	/**
-	 * Excludes a match on the starting characters of a field value.
-	 *
-	 * @return DataQuery
-	 */
+    /**
+     * Excludes a match on the starting characters of a field value.
+     *
+     * @param DataQuery $query
+     * @return bool|DataQuery
+     */
 	protected function excludeOne(DataQuery $query) {
 		return true;
 	}
