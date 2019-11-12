@@ -19,9 +19,11 @@
 		}
 	},
 	"extra" : {
-		"installer-name": "datedropdownselectorfield",
 		"expose" : [
 			"css"
-		]
+		],
+        "branch-alias": {
+            "dev-master": "2.0.x-dev"
+        }
 	}
 }
