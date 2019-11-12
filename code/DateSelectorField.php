@@ -131,8 +131,8 @@ class DateSelectorField extends CompositeField {
 				$content .= "\n" . $subfield->FieldHolder() . "\n";
 			}
 		}
-		$message = $this->Message();
-		$type = $this->MessageType();
+		$message = $this->getMessage();
+		$type = $this->getMessageType();
 
 		$content .= (!empty($message)) ? "<span class=\"message $type\">$message</span>" : "";
 
