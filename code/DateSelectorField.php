@@ -23,10 +23,15 @@ class DateSelectorField extends CompositeField {
 	protected $year;
 
 	public function __construct($name, $title = null, $value = null, $modifier = null) {
-		$this->name = $name .'[' . $modifier . ']';
+		// Only set a modifier if one is provided
+		if ($modifier) {
+			$name = $name .'[' . $modifier . ']';
+			$this->modifier = $modifier;
+		}
 
+		$this->name = $name;
 		$this->setTitle($title);
-		$this->modifier = $modifier;
+
 		$dayArray = array(
 			0 => 'Day'
 		);
@@ -93,6 +98,7 @@ class DateSelectorField extends CompositeField {
 		Requirements::css('dnadesign/silverstripe-datedropdownselectorfield: css/admin.css');
 
 		parent::__construct($fields);
+		$this->setName($name);
 		$this->setValue($value);
 	}
 
@@ -104,10 +110,16 @@ class DateSelectorField extends CompositeField {
 	 * Set the field name
 	 */
 	public function setName($name) {
-		$this->name = $name . '[' . $this->modifier . ']';
+		if ($this->modifier) {
+			$this->name = $name . '[' . $this->modifier . ']';
+		} else {
+			$this->name = $name;
+		}
+
 		$this->day->setName($this->name . '[Day]');
 		$this->month->setName($this->name . '[Month]');
 		$this->year->setName($this->name . '[Year]');
+
 		return $this;
 	}
 
